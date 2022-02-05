@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  # definição do serviço com base em
+  # https://niole.net/how-to-load-csv-data-into-mysql-2bce9545822c
+  db:
+    build:
+      context: ./
+      dockerfile: ./db/Dockerfile
+    container_name: "movielens-db"
+    command:
+      - '--default-authentication-plugin=mysql_native_password'
+      - '--local-infile=1'
+      - '--secure-file-priv=docker-entrypoint-initdb.d'
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: "movielensDB"
+      MYSQL_USER: leofmr
+      MYSQL_PASSWORD: rocha
+    ports:
+      - 3306:3306
+    
